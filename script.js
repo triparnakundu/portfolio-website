@@ -182,12 +182,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     statValue.classList.add('counted');
                     const text = statValue.textContent;
                     const number = parseInt(text.replace(/[^0-9]/g, ''));
-                    const suffix = text.replace(/[0-9]/g, '');
+                    
+                    // Preserve the prefix (like $) and suffix (like K+)
+                    let prefix = '';
+                    let suffix = '';
+                    const originalText = text.trim();
+                    
+                    // Check if it starts with $ or other currency symbols
+                    if (originalText.startsWith('$')) {
+                        prefix = '$';
+                        suffix = originalText.replace(/^\$?\d+/, '').replace(/\d+/g, '');
+                    } else {
+                        suffix = originalText.replace(/[0-9]/g, '');
+                    }
                     
                     if (number) {
-                        statValue.textContent = '0' + suffix;
+                        statValue.textContent = prefix + '0' + suffix;
                         setTimeout(() => {
-                            animateValue(statValue, 0, number, 2000, suffix);
+                            // Create a custom animation that preserves prefix
+                            function animateWithPrefix(element, start, end, duration, prefix, suffix) {
+                                let startTimestamp = null;
+                                const step = (timestamp) => {
+                                    if (!startTimestamp) startTimestamp = timestamp;
+                                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                                    const current = Math.floor(progress * (end - start) + start);
+                                    element.textContent = prefix + current + suffix;
+                                    if (progress < 1) {
+                                        window.requestAnimationFrame(step);
+                                    } else {
+                                        element.textContent = prefix + end + suffix;
+                                    }
+                                };
+                                window.requestAnimationFrame(step);
+                            }
+                            animateWithPrefix(statValue, 0, number, 2000, prefix, suffix);
                         }, 500);
                     }
                 }

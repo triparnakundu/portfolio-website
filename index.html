@@ -35,8 +35,8 @@
     <section id="home" class="hero">
         <div class="hero-chart-bg">
             <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-                <!-- Grid lines for analytics feel -->
                 <defs>
+                    <!-- Gradients -->
                     <linearGradient id="chartGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" style="stop-color:rgba(212,175,55,0.6);stop-opacity:1" />
                         <stop offset="100%" style="stop-color:rgba(212,175,55,0.2);stop-opacity:1" />
@@ -45,18 +45,31 @@
                         <stop offset="0%" style="stop-color:rgba(114,47,55,0.5);stop-opacity:1" />
                         <stop offset="100%" style="stop-color:rgba(114,47,55,0.2);stop-opacity:1" />
                     </linearGradient>
+                    <linearGradient id="sustainabilityGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(76,175,80,0.15);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(76,175,80,0.05);stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="mlGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(63,81,181,0.12);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(63,81,181,0.04);stop-opacity:1" />
+                    </linearGradient>
+                    <!-- Arrow marker for operations flow -->
+                    <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                        <polygon points="0 0, 6 3, 0 6" fill="rgba(212,175,55,0.25)" />
+                    </marker>
                 </defs>
-                <!-- Subtle grid -->
+                
+                <!-- Grid lines for analytics feel -->
                 <line x1="0" y1="200" x2="1200" y2="200" stroke="rgba(212,175,55,0.05)" stroke-width="1" />
                 <line x1="0" y1="400" x2="1200" y2="400" stroke="rgba(212,175,55,0.05)" stroke-width="1" />
                 <line x1="0" y1="600" x2="1200" y2="600" stroke="rgba(212,175,55,0.05)" stroke-width="1" />
-                <!-- Stock Chart Line 1 - Rising trend -->
+                
+                <!-- FINANCE: Stock Chart Lines -->
                 <path class="chart-line" d="M 0 600 Q 150 550 300 580 T 600 560 T 900 540 T 1200 520" stroke="url(#chartGradient1)" />
-                <!-- Stock Chart Line 2 - Volatile trend -->
                 <path class="chart-line chart-line-2" d="M 0 500 Q 200 450 400 480 T 800 460 T 1200 440" stroke="url(#chartGradient2)" />
-                <!-- Stock Chart Line 3 - Steady growth -->
                 <path class="chart-line chart-line-3" d="M 0 700 Q 100 650 200 680 T 400 660 T 600 640 T 800 620 T 1000 600 T 1200 580" />
-                <!-- Data Points with staggered animation -->
+                
+                <!-- FINANCE: Data Points -->
                 <circle class="chart-dot" cx="150" cy="550" r="4" />
                 <circle class="chart-dot" cx="300" cy="580" r="4" />
                 <circle class="chart-dot" cx="450" cy="570" r="4" />
@@ -69,6 +82,64 @@
                 <circle class="chart-dot" cx="600" cy="470" r="3" />
                 <circle class="chart-dot" cx="800" cy="460" r="3" />
                 <circle class="chart-dot" cx="1000" cy="450" r="3" />
+                
+                <!-- MACHINE LEARNING: Neural Network Nodes -->
+                <g class="ml-network" opacity="0.2">
+                    <!-- Input layer nodes -->
+                    <circle cx="100" cy="150" r="5" fill="rgba(63,81,181,0.4)" class="network-node" />
+                    <circle cx="100" cy="200" r="5" fill="rgba(63,81,181,0.4)" class="network-node" />
+                    <circle cx="100" cy="250" r="5" fill="rgba(63,81,181,0.4)" class="network-node" />
+                    <!-- Hidden layer nodes -->
+                    <circle cx="300" cy="150" r="6" fill="rgba(63,81,181,0.5)" class="network-node" />
+                    <circle cx="300" cy="200" r="6" fill="rgba(63,81,181,0.5)" class="network-node" />
+                    <circle cx="300" cy="250" r="6" fill="rgba(63,81,181,0.5)" class="network-node" />
+                    <circle cx="300" cy="300" r="6" fill="rgba(63,81,181,0.5)" class="network-node" />
+                    <!-- Output layer node -->
+                    <circle cx="500" cy="200" r="7" fill="rgba(63,81,181,0.6)" class="network-node" />
+                    <!-- Connections -->
+                    <line x1="100" y1="150" x2="300" y2="150" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                    <line x1="100" y1="200" x2="300" y2="200" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                    <line x1="100" y1="250" x2="300" y2="250" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                    <line x1="300" y1="150" x2="500" y2="200" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                    <line x1="300" y1="200" x2="500" y2="200" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                    <line x1="300" y1="250" x2="500" y2="200" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                    <line x1="300" y1="300" x2="500" y2="200" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                </g>
+                
+                <!-- SUSTAINABILITY: Leaf/Nature Patterns -->
+                <g class="sustainability-pattern" opacity="0.15">
+                    <!-- Leaf shapes -->
+                    <path d="M 900 100 Q 920 80 940 100 T 960 100 Q 940 120 920 100 Z" fill="rgba(76,175,80,0.3)" />
+                    <path d="M 1000 180 Q 1020 160 1040 180 T 1060 180 Q 1040 200 1020 180 Z" fill="rgba(76,175,80,0.3)" />
+                    <path d="M 1100 120 Q 1120 100 1140 120 T 1160 120 Q 1140 140 1120 120 Z" fill="rgba(76,175,80,0.3)" />
+                    <!-- Circular sustainability symbols -->
+                    <circle cx="950" cy="250" r="8" fill="none" stroke="rgba(76,175,80,0.25)" stroke-width="1.5" />
+                    <circle cx="1050" cy="280" r="6" fill="none" stroke="rgba(76,175,80,0.25)" stroke-width="1.5" />
+                    <circle cx="1150" cy="220" r="7" fill="none" stroke="rgba(76,175,80,0.25)" stroke-width="1.5" />
+                </g>
+                
+                <!-- OPERATIONS: Flowchart/Process Elements -->
+                <g class="operations-flow" opacity="0.18">
+                    <!-- Process boxes -->
+                    <rect x="800" y="300" width="60" height="30" rx="4" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="1.5" />
+                    <rect x="900" y="300" width="60" height="30" rx="4" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="1.5" />
+                    <rect x="1000" y="300" width="60" height="30" rx="4" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="1.5" />
+                    <!-- Decision diamond -->
+                    <path d="M 850 350 L 870 370 L 850 390 L 830 370 Z" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="1.5" />
+                    <!-- Flow arrows -->
+                    <path d="M 860 315 L 900 315" stroke="rgba(212,175,55,0.25)" stroke-width="1" marker-end="url(#arrowhead)" />
+                    <path d="M 960 315 L 1000 315" stroke="rgba(212,175,55,0.25)" stroke-width="1" marker-end="url(#arrowhead)" />
+                    <path d="M 850 350 L 850 370" stroke="rgba(212,175,55,0.25)" stroke-width="1" />
+                </g>
+                
+                <!-- Additional ML pattern on right -->
+                <g class="ml-pattern-2" opacity="0.15">
+                    <circle cx="1100" cy="400" r="4" fill="rgba(63,81,181,0.4)" />
+                    <circle cx="1120" cy="420" r="4" fill="rgba(63,81,181,0.4)" />
+                    <circle cx="1140" cy="400" r="4" fill="rgba(63,81,181,0.4)" />
+                    <line x1="1100" y1="400" x2="1120" y2="420" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                    <line x1="1120" y1="420" x2="1140" y2="400" stroke="rgba(63,81,181,0.2)" stroke-width="1" />
+                </g>
             </svg>
         </div>
         <div class="hero-container">
@@ -89,7 +160,7 @@
                     </div>
                     <div class="hero-stats">
                         <div class="hero-stat hero-stat-large">
-                            <span class="hero-stat-value">$400K+</span>
+                            <span class="hero-stat-value">$<span class="stat-number">400</span>K+</span>
                             <span class="hero-stat-label">Funding Contributed</span>
                         </div>
                         <div class="hero-stat hero-stat-medium">
