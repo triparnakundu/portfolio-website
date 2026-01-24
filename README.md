@@ -111,11 +111,30 @@ Replace `assets/profile-photo.png` with your own photo (recommended size: 400x40
 2. Run `vercel` in the portfolio directory
 3. Follow the prompts
 
+## Contact Form Setup
+
+The contact form uses Formspree to send emails directly to your inbox. To set it up:
+
+1. Go to [Formspree.io](https://formspree.io) and create a free account
+2. Create a new form
+3. Copy your form ID (it will look like: `xvgkqjpn`)
+4. Open `index.html` and find the contact form (around line 469)
+5. Replace `YOUR_FORM_ID` in the form action URL with your actual Formspree form ID:
+   ```html
+   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+   ```
+   Should become:
+   ```html
+   <form action="https://formspree.io/f/xvgkqjpn" method="POST">
+   ```
+6. Save and push to GitHub - your form will now work!
+
+**Note:** Formspree free tier allows 50 submissions per month, which is perfect for a portfolio site.
+
 ## Contact
 
 For questions or updates, contact:
 - Email: triparna178@gmail.com
-- Phone: +1 (617) 870-9404
 
 ---
 

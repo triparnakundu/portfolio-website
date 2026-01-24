@@ -195,3 +195,54 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Contact Form Handling
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitButton = contactForm.querySelector('.btn-submit');
+        const originalText = submitButton.textContent;
+        
+        // Disable submit button
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        formStatus.className = 'form-status';
+        formStatus.style.display = 'none';
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                formStatus.className = 'form-status success';
+                formStatus.textContent = 'Thank you! Your message has been sent successfully. I\'ll get back to you soon.';
+                formStatus.style.display = 'block';
+                contactForm.reset();
+                
+                // Scroll to status message
+                formStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            formStatus.className = 'form-status error';
+            formStatus.textContent = 'Oops! There was an error sending your message. Please try again or email me directly at triparna178@gmail.com';
+            formStatus.style.display = 'block';
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+        }
+    });
+}
