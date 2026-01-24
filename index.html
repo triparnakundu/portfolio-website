@@ -33,6 +33,44 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-chart-bg">
+            <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+                <!-- Grid lines for analytics feel -->
+                <defs>
+                    <linearGradient id="chartGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:rgba(212,175,55,0.6);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(212,175,55,0.2);stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="chartGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:rgba(114,47,55,0.5);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(114,47,55,0.2);stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <!-- Subtle grid -->
+                <line x1="0" y1="200" x2="1200" y2="200" stroke="rgba(212,175,55,0.05)" stroke-width="1" />
+                <line x1="0" y1="400" x2="1200" y2="400" stroke="rgba(212,175,55,0.05)" stroke-width="1" />
+                <line x1="0" y1="600" x2="1200" y2="600" stroke="rgba(212,175,55,0.05)" stroke-width="1" />
+                <!-- Stock Chart Line 1 - Rising trend -->
+                <path class="chart-line" d="M 0 600 Q 150 550 300 580 T 600 560 T 900 540 T 1200 520" stroke="url(#chartGradient1)" />
+                <!-- Stock Chart Line 2 - Volatile trend -->
+                <path class="chart-line chart-line-2" d="M 0 500 Q 200 450 400 480 T 800 460 T 1200 440" stroke="url(#chartGradient2)" />
+                <!-- Stock Chart Line 3 - Steady growth -->
+                <path class="chart-line chart-line-3" d="M 0 700 Q 100 650 200 680 T 400 660 T 600 640 T 800 620 T 1000 600 T 1200 580" />
+                <!-- Data Points with staggered animation -->
+                <circle class="chart-dot" cx="150" cy="550" r="4" />
+                <circle class="chart-dot" cx="300" cy="580" r="4" />
+                <circle class="chart-dot" cx="450" cy="570" r="4" />
+                <circle class="chart-dot" cx="600" cy="560" r="4" />
+                <circle class="chart-dot" cx="750" cy="550" r="4" />
+                <circle class="chart-dot" cx="900" cy="540" r="4" />
+                <circle class="chart-dot" cx="1050" cy="530" r="4" />
+                <circle class="chart-dot" cx="200" cy="450" r="3" />
+                <circle class="chart-dot" cx="400" cy="480" r="3" />
+                <circle class="chart-dot" cx="600" cy="470" r="3" />
+                <circle class="chart-dot" cx="800" cy="460" r="3" />
+                <circle class="chart-dot" cx="1000" cy="450" r="3" />
+            </svg>
+        </div>
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-image-wrapper">
@@ -67,7 +105,7 @@
                             <span class="hero-stat-label">Publications</span>
                         </div>
                         <div class="hero-stat">
-                            <span class="hero-stat-value">100K+</span>
+                            <span class="hero-stat-value">2M+</span>
                             <span class="hero-stat-label">Records Analyzed</span>
                         </div>
                     </div>
@@ -126,64 +164,6 @@
                         </div>
                         <p class="edu-institution">Vellore Institute of Technology, Chennai, India</p>
                         <p class="edu-period">Jul 2019 — May 2024</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills (below About, no nav) -->
-    <section id="skills" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">R</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">MATLAB</span>
-                        <span class="skill-tag">C</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>ML & AI Frameworks</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">Keras</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                        <span class="skill-tag">OpenCV</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Data Analysis & Visualization</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Tableau</span>
-                        <span class="skill-tag">Power BI</span>
-                        <span class="skill-tag">Alteryx</span>
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Matplotlib</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Big Data & Tools</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Hadoop</span>
-                        <span class="skill-tag">Hive</span>
-                        <span class="skill-tag">Jupyter Notebook</span>
-                        <span class="skill-tag">Anaconda</span>
-                        <span class="skill-tag">NVivo</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Business Tools</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Microsoft Office Suite</span>
-                        <span class="skill-tag">Visual Studio Code</span>
-                        <span class="skill-tag">Miro</span>
                     </div>
                 </div>
             </div>
@@ -418,6 +398,64 @@
                 <div class="honor-card">
                     <h3>International Science Olympiad - 2017</h3>
                     <p>Bronze Medal at the district level</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section id="skills" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">R</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">C</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>ML & AI Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">Keras</span>
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">OpenCV</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Data Analysis & Visualization</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Alteryx</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Matplotlib</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Big Data & Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Hadoop</span>
+                        <span class="skill-tag">Hive</span>
+                        <span class="skill-tag">Jupyter Notebook</span>
+                        <span class="skill-tag">Anaconda</span>
+                        <span class="skill-tag">NVivo</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Business Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microsoft Office Suite</span>
+                        <span class="skill-tag">Visual Studio Code</span>
+                        <span class="skill-tag">Miro</span>
+                    </div>
                 </div>
             </div>
         </div>

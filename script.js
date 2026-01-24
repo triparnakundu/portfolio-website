@@ -31,17 +31,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
+// Enhanced navbar background on scroll
 const navbar = document.querySelector('.navbar');
 let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    if (currentScroll > 100) {
-        navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+    if (currentScroll > 50) {
+        navbar.style.boxShadow = '0 4px 20px rgba(10, 14, 39, 0.15)';
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.borderBottom = '1px solid rgba(212, 175, 55, 0.2)';
     } else {
-        navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+        navbar.style.boxShadow = '0 2px 8px rgba(10, 14, 39, 0.08)';
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.borderBottom = '1px solid var(--border-color)';
     }
     
     lastScroll = currentScroll;
@@ -70,36 +74,63 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Fade in animation on scroll
+// Enhanced fade in animation on scroll with stagger
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    threshold: 0.15,
+    rootMargin: '0px 0px -80px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('animated');
+            }, index * 100); // Stagger animation
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe all sections and cards
-document.querySelectorAll('.timeline-item, .research-card, .publication-item, .skill-category, .honor-card, .service-card, .blog-card, .blog-post').forEach(el => {
+// Observe all sections and cards with enhanced animations
+document.querySelectorAll('.timeline-item, .research-card, .publication-item, .skill-category, .honor-card, .service-card, .blog-card, .blog-post, .education-card, .talk-item').forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    el.style.transform = 'translateY(40px)';
+    el.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
     observer.observe(el);
 });
 
-// Add parallax effect to hero section
+// Animate section titles
+document.querySelectorAll('.section-title').forEach(title => {
+    observer.observe(title);
+});
+
+// Enhanced parallax effect to hero section
+let ticking = false;
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        hero.style.opacity = 1 - (scrolled / window.innerHeight);
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const heroImage = document.querySelector('.hero-image-wrapper');
+            const heroText = document.querySelector('.hero-text');
+            
+            if (hero && scrolled < window.innerHeight) {
+                const opacity = Math.max(0, 1 - (scrolled / window.innerHeight) * 1.5);
+                hero.style.opacity = opacity;
+                
+                // Parallax for image and text
+                if (heroImage) {
+                    heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+                if (heroText) {
+                    heroText.style.transform = `translateY(${scrolled * 0.2}px)`;
+                }
+            }
+            ticking = false;
+        });
+        ticking = true;
     }
 });
 
@@ -117,6 +148,23 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
+// Number counting animation for hero stats
+function animateValue(element, start, end, duration, suffix = '') {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = Math.floor(progress * (end - start) + start);
+        element.textContent = current + suffix;
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            element.textContent = end + suffix;
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     // Add fade-in to hero content
@@ -125,8 +173,85 @@ document.addEventListener('DOMContentLoaded', () => {
         heroText.style.animation = 'fadeInUp 1s ease';
     }
     
+    // Animate hero stats with counting effect
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statValue = entry.target.querySelector('.hero-stat-value');
+                if (statValue && !statValue.classList.contains('counted')) {
+                    statValue.classList.add('counted');
+                    const text = statValue.textContent;
+                    const number = parseInt(text.replace(/[^0-9]/g, ''));
+                    const suffix = text.replace(/[0-9]/g, '');
+                    
+                    if (number) {
+                        statValue.textContent = '0' + suffix;
+                        setTimeout(() => {
+                            animateValue(statValue, 0, number, 2000, suffix);
+                        }, 500);
+                    }
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    document.querySelectorAll('.hero-stat').forEach(stat => {
+        statsObserver.observe(stat);
+    });
+    
     // Smooth scroll to top on page refresh
     window.scrollTo(0, 0);
+    
+    // Add golden glow cursor effect
+    const cursorGlow = document.createElement('div');
+    cursorGlow.className = 'cursor-glow';
+    document.body.appendChild(cursorGlow);
+    
+    let mouseX = 0, mouseY = 0;
+    let glowX = 0, glowY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function animateGlow() {
+        glowX += (mouseX - glowX) * 0.15;
+        glowY += (mouseY - glowY) * 0.15;
+        cursorGlow.style.left = glowX + 'px';
+        cursorGlow.style.top = glowY + 'px';
+        requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+    
+    // Add enhanced glow effect to interactive elements (including dynamically added ones)
+    function addGlowToElements() {
+        document.querySelectorAll('a, button, .btn, .nav-link, .social-link, .hero-collab-link, .publication-link, .service-card, .skill-tag, .timeline-content, .research-card, .honor-card, .blog-card, .contact-link, .education-card').forEach(el => {
+            // Remove existing listeners to avoid duplicates
+            if (!el.hasAttribute('data-glow-attached')) {
+                el.setAttribute('data-glow-attached', 'true');
+                el.addEventListener('mouseenter', () => {
+                    cursorGlow.classList.add('glow-intense');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorGlow.classList.remove('glow-intense');
+                });
+            }
+        });
+    }
+    
+    // Initial attachment
+    addGlowToElements();
+    
+    // Re-attach when new content loads (for dynamic content)
+    const observer = new MutationObserver(() => {
+        addGlowToElements();
+    });
+    
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 });
 
 // Add hover effect to skill tags
@@ -162,7 +287,7 @@ document.querySelectorAll('.btn').forEach(btn => {
     });
 });
 
-// Add CSS for ripple effect
+// Add CSS for enhanced effects
 const style = document.createElement('style');
 style.textContent = `
     .btn {
@@ -187,11 +312,86 @@ style.textContent = `
     }
     
     .nav-link.active {
-        color: var(--highlight-color);
+        color: var(--gold-dark);
     }
     
     .nav-link.active::after {
         width: 100%;
+    }
+    
+    .cursor-glow {
+        width: 200px;
+        height: 200px;
+        position: fixed;
+        pointer-events: none;
+        z-index: 99999;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.2) 30%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(30px);
+        opacity: 0.6;
+        transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+        animation: glowPulse 3s ease-in-out infinite;
+        mix-blend-mode: screen;
+        will-change: transform, opacity;
+    }
+    
+    .cursor-glow.glow-intense {
+        opacity: 0.9;
+        filter: blur(40px);
+        transform: translate(-50%, -50%) scale(1.3);
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.6) 0%, rgba(212, 175, 55, 0.4) 30%, rgba(212, 175, 55, 0.2) 50%, transparent 70%);
+        animation: glowPulseIntense 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes glowPulse {
+        0%, 100% {
+            opacity: 0.5;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+            opacity: 0.7;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+    }
+    
+    @keyframes glowPulseIntense {
+        0%, 100% {
+            opacity: 0.8;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .cursor-glow {
+            display: none;
+        }
+    }
+    
+    .animated {
+        animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    
+    /* Smooth scrollbar styling */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--bg-cream);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--gold-primary), var(--gold-dark));
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, var(--gold-dark), var(--burgundy));
     }
 `;
 document.head.appendChild(style);
