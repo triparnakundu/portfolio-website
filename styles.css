@@ -238,7 +238,7 @@ body {
 
 .hero-stats {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
     margin-bottom: 2.5rem;
     animation: fadeInUp 1s ease 0.5s both;
@@ -720,16 +720,20 @@ body {
     font-style: italic;
 }
 
+.subsection-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 3rem 0 1.5rem;
+    font-weight: 600;
+}
+
+.subsection-title:first-of-type {
+    margin-top: 0;
+}
+
 .talks-section {
     max-width: 1000px;
     margin: 0 auto;
-}
-
-.talks-title {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    text-align: center;
 }
 
 .talks-list {
