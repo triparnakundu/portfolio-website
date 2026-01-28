@@ -1706,11 +1706,36 @@ body {
 .blog-posts {
     max-width: 720px;
     margin: 0 auto;
+    display: none;
+}
+
+.blog-posts.active {
+    display: block;
 }
 
 .blog-post {
+    display: none;
     padding: 2.5rem 0;
     border-bottom: 1px solid var(--border-color);
+}
+
+.blog-post.active {
+    display: block;
+}
+
+.blog-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold-dark);
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+.blog-back-btn:hover {
+    color: var(--gold-primary);
 }
 
 .blog-post:last-child {
